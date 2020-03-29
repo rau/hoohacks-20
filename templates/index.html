@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    .marker {
+      background-image: url('static/mapbox-icon.png');
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+  <title>Maps</title>
+</head>
+<body>
+    <div id = "home" style = "font-family: Quicksand;">
+      <div class="topnav" id="navbar">
+          <div id="logindiv">
+              <span id="logintext">GiveAndTake</span>
+          </div>
+
+          <div id="links">
+              <a href="#login">Login</a>
+              <a href="#signup">Signup</a>
+              <a href="#faq">|</a>
+              <a href="#about">About</a>
+              <a href="#faq">FAQ</a>
+              <a href="#whydonate">Why Donate?</a>
+              <a href="#map_sidenav">Map</a>
+          </div>  
+      </div>
+      <div id = "intro">
+          <div id = "textbox" style = "text-align: center; color: black; font-weight: bolder;" >
+              <span style = "font-size: 23px; position:relative; top: 60px;">by DAGA and PHILIZAIRE</span>
+              <span style="font-size: 80px; position:relative; top: 80px;">GiveAndTake</span>
+              <hr style = "position:relative; top: 100px; border: 2px solid rgb(0, 0, 0); width: 50%;">
+              <span style="font-size: 23px; position:relative; top: 110px;">Help those in need. Get help in need.</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div id = "map_sidenav">
+      <div id = "map">
+        <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmQzNjAiLCJhIjoiY2s4Y3VjdXFpMGxjbTNsanE5cWhzNXd3bSJ9.z-sq6wzY2jA3oG6sW5_Uqg';
+        
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/light-v10',
+          center: [-96, 37.8],
+          zoom: 3
+        });
+        
+        var geojson = {
+          type: 'FeatureCollection',
+          features: [{
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [-77.032, 38.913]
+            },
+            properties: {
+              title: 'Mapbox',
+              description: 'Washington, D.C.'
+            }
+          },
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [-122.414, 37.776]
+            },
+            properties: {
+              title: 'Mapbox',
+              description: 'San Francisco, California'
+            }
+          }]
+        };
+        
+        // add markers to map
+        geojson.features.forEach(function(marker){
+        
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+        
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+            .addTo(map);
+        });
+        
+        </script>
+
+      </div>
+      
+    </div>
+
+
+</body>
+</html>
