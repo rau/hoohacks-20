@@ -6,7 +6,9 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script type="text/javascript" src="static/latlng.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
     <style>
       .marker {
@@ -16,6 +18,8 @@
         height: 50px;
         border-radius: 50%;
         cursor: pointer;
+        border:1px solid gray;
+        background-color:lightblue;
       }
     </style>
 </head>
@@ -34,39 +38,87 @@ var map = new mapboxgl.Map({
   zoom: 3
 });
 
-var geojson = {
-  type: 'FeatureCollection',
-  features: [{
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-77.032, 38.913]
-    },
-    properties: {
-      title: 'Mapbox',
-      description: 'Washington, D.C.'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-122.414, 37.776]
-    },
-    properties: {
-      title: 'Mapbox',
-      description: 'San Francisco, California'
-    }
-  }]
-};
+  var geojson = {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [-77.032, 38.913]
+      },
+      properties: {
+        title: 'Mapbox',
+        description: 'Washington, D.C.'
+      }
+    }]
+  };
 
-geojson = JSON.parse('{{ map }}');
+{% for address in list_new %}
+  // console.log({{address}})
+  geojson["features"].push({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: {{address[0]}}
+      },
+      properties: {
+        title: '{{address[1]}}',
+        description: '{{address[2]}}'
+      }
+    })
+{% endfor %}
+
+
 console.log(geojson)
+// async function getJSONFile(){
+//   var lol = await fetch("/static/latlng.json")
+//       .then(res => res.json())
+//       .then(data => lol = data)
+  
+//     return lol
+  
+// }
 
+// async function doStuff(){
+//   geojson = await getJSONFile();
+//   console.log(geojson);
+//   geojson.features.forEach(function(marker){
+//     console.log(marker.geometry.coordinates)
 
+//     // create a HTML element for each feature
+//     var el = document.createElement('div');
+//     el.className = 'marker';
 
-// add markers to map
-geojson.features.forEach(function(marker){
+//     // make a marker for each feature and add to the map
+//     new mapboxgl.Marker(el)
+//     .setLngLat(marker.geometry.coordinates)
+//     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+//     .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+//     .addTo(map);
+//   });
+// }
+
+// var obja = JSON.parse("static/latlng.json");
+// console.log(obja);
+// var geojson = 'a';
+console.log(geojson)
+// var bool = false;
+
+// $.getJSON("https://api.myjson.com/bins/yxpaw", function( json ) {
+      
+//      changeJSON(json)
+//      bool = true;
+// });
+
+// var el = document.createElement('div');  
+// el.appendChild(map)                                     
+// el.style.width = '50px';                                                      
+// el.style.height = '50px';
+// el.style.borderRadius = '50%';                                                     
+// new mapboxgl.Marker(el).setLngLat([45.702117, 42.395926]).addTo(map);
+
+geojson.features.forEach(function (marker) {
+    console.log(marker.geometry.coordinates)
 
     // create a HTML element for each feature
     var el = document.createElement('div');
@@ -74,11 +126,35 @@ geojson.features.forEach(function(marker){
 
     // make a marker for each feature and add to the map
     new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-    .addTo(map);
-});
+      .setLngLat(marker.geometry.coordinates)
+      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+      .addTo(map);
+  })
+
+
+// // console.log(change)
+// function changeJSON(myJSON){
+//   geojson = myJSON;
+//   console.log(geojson)
+  
+// }
+
+// while (bool == false){
+//   console.log(geojson)
+// }
+
+console.log(geojson)
+
+
+
+// doStuff();
+
+
+
+
+
+
 
 </script>
 

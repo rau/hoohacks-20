@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 from flask import send_file, make_response, send_from_directory
-from functions import get_json
+from functions import json_to_list
 import os
 
 
@@ -20,10 +20,8 @@ def home():
     return render_template("index.html")
 
 @app.route("/map")
-def map():
-    map = get_json()
-    print(map)
-    return render_template("map.html", map=map)
+def map(): 
+    return render_template("map.html", list_new=json_to_list())
 
 
 app.run(debug=True)
