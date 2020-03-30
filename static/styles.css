@@ -1,5 +1,8 @@
 /* gets rid of white space */
-body { margin:0; } 
+body { margin:0; 
+    font-family: 'Quicksand', sans-serif;
+} 
+
 
 html{
     scroll-behavior: smooth;
@@ -7,15 +10,11 @@ html{
   }
 
 :root {
-    --maroon-color:rgb(156, 53, 53);
+    --maroon-color:rgb(179, 86, 0);
     --brownish: rgb(224, 168, 104);
 }
 
-#intro {
-    height: 90vh;
-    width: 100%;
-    background-color: rgb(255,250,240);
-}
+
 
 #map_sidenav {
     height: 120vh;
@@ -39,9 +38,8 @@ html{
 #membersinfo {
     background-color: rgb(43, 43, 43);
     width : 100%;
-    height : 90%;
+    height : 82%;
     overflow: scroll;
-    overflow-y: auto;
 }
 
 .memberdiv{
@@ -185,7 +183,7 @@ html{
 .topnav a:hover {
     font-weight: bolder;
     font-size: 21px;
-    color: rgb(127, 233, 228);
+    color: var(--maroon-color);
     text-decoration: none;
 }
 
@@ -204,4 +202,3 @@ html{
 #navbar {
     overflow: hidden;
 }
-

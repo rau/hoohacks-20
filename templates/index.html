@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
   <style>
     .marker {
       background-image: url('static/mapbox-icon.png');
@@ -21,6 +23,34 @@
       cursor: pointer;
     }
   </style>
+  <script>
+    function openForm() {
+      if (document.getElementById("popupForm").style.display == "block"){
+        closeForm()
+        return;
+      }
+      document.getElementById("popupForm").style.display = "block";
+      document.getElementById("fullpage").style.overflow = "hidden";
+      }
+    function closeForm() {
+      document.getElementById("popupForm").style.display = "none";
+      // document.getElementById("fullpage").style.overflow = "visible";
+    }
+    function openFAQ(){
+      if (document.getElementById("FAQmodal").style.display == "block"){
+        closeFAQ()
+        return;
+      }
+      document.getElementById("FAQmodal").style.display = "block"
+      // document.getElementById("fullpage").style.overflow = "hidden";
+
+    }
+    function closeFAQ() {
+        document.getElementById("FAQmodal").style.display = "none"
+        document.getElementById("fullpage").style.overflow = "visible";
+      }
+
+  </script>
   <title>Maps</title>
 </head>
 <body id = "fullpage">
@@ -34,82 +64,71 @@
           <div id="links">
               <!-- <a href="#login">Login</a> -->
               <a href="javascript:openForm();">Request</a>
-              <div class="login-popup">
-                <div class="form-popup" id="popupForm">
-                  <form action="/action_page.php" class="form-container">
-                    <h2>Item Request Form</h2>
-                    <label for="fullname">
-                      <strong>Full Name</strong>
-                    </label>
-                    <input type="text" id="email" placeholder="Your Name" name="email" required>
-                    <br>
-                    <br>
-                    <label for="address">
-                      <strong>Address</strong>
-                    </label>
-                    <input type="text" id="psw" placeholder="Street Address" name="psw" required>
-                    <input type = "text" id="city" placeholder="City" name="city" required>
-                    <input type = "text" id="state" placeholder="State/Province" name="state" required>
-                    <input type = "text" id="zip" placeholder="Postal/Zip Code" name="zip" required>
-                    <br>
-                    <br>
-                    <input type="text" id="itemneeded" placeholder="Item Needed" name="itemneeded" required>
-
-                    <button type="submit" class="btn">Submit Form</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                  </form>
-                </div>
-              </div>
-              <script>
-                function openForm() {
-                    if (document.getElementById("popupForm").style.display == "block"){
-                      closeForm()
-                      return;
-                    }
-                    document.getElementById("popupForm").style.display = "block";
-                    document.getElementById("fullpage").style.overflow = "hidden";
-                    document.getElementById("intro").style.filter = "blur(5px)"
-                    
-
-                  }
-                  function closeForm() {
-                    document.getElementById("popupForm").style.display = "none";
-                    document.getElementById("fullpage").style.overflow = "visible";
-                    document.getElementById("intro").style.filter = "none"
-
-                  }
-              </script>
               <a href="#">|</a>
-              <a href="#about">About</a>
-              <a href="#faq">FAQ</a>
-              <a href="#whydonate">Why Donate?</a>
+              <a href="javascript:openFAQ();">About</a>
+              <a href="javascript:openFAQ();">FAQ</a>
+              <a href="javascript:openFAQ();">Why Donate?</a>
               <!-- <a href="#map_sidenav">Map</a> -->
           </div>  
-      </div>
-      <!-- <div id = "intro">
-          <div id = "textbox" style = "text-align: center; color: black; font-weight: bolder;" >
-              <span style = "font-size: 23px; position:relative; top: 60px;">by DAGA and PHILIZAIRE</span>
-              <span style="font-size: 80px; position:relative; top: 80px;">GiveAndTake</span>
-              <hr style = "position:relative; top: 100px; border: 2px solid rgb(0, 0, 0); width: 50%;">
-              <span style="font-size: 23px; position:relative; top: 110px;">Help those in need. Get help in need.</span>
         </div>
-      </div> -->
-      <div id = "faq">
-        <div id="textbox" style="text-align: center; color: black; font-weight: bolder;">
-          <span style="font-size: 23px; position:relative; top: 60px;">by DAGA and PHILIZAIRE</span>
-          <span style="font-size: 80px; position:relative; top: 80px;">GiveAndTake</span>
-          <hr style="position:relative; top: 100px; border: 2px solid rgb(0, 0, 0); width: 50%;">
-          <span style="font-size: 23px; position:relative; top: 110px;">Help those in need. Get help in need.</span>
-        </div>
+    </div>
+
+    <div class="popup">
+      <div class="form-popup" id="popupForm">
+        <form action="/add/" method="POST" class="form-container" style="font-size:12px;">
+          <h2 style="text-align: center;">Item Request Form</h2>
+          <!-- <label for="fullname">
+            <strong>Full Name</strong>
+          </label> -->
+          <input type="text" id="name" placeholder="Your Name" name="name" required style="padding:10px;">
+          <br>
+          <br>
+          <!-- <label for="address">
+            <strong>Address</strong>
+          </label> -->
+          <input type = "text" id="street" placeholder="Street Address" name="street" style="padding:10px;" required>
+          <input type = "text" id="city" placeholder="City" name="city" style="padding:10px;" required>
+          <input type = "text" id="state" placeholder="State/Province" name="state" style="padding:10px;" required>
+          <input type = "text" id="zip" placeholder="Postal/Zip Code" name="zip" style="padding:10px;"required>
+          <br>
+          <br>
+          <input type="text" id="itemneeded" placeholder="Item Needed" name="itemneeded" style="padding:10px;" required>
+          <br>
+          <br>
+          <button type="submit" class="btn">Submit Form</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
       </div>
     </div>
 
+    <div class="popup" ">
+      <div class="faq-popup" id="FAQmodal" style = "width: 50%; height: 50%; background-color: white; text-align: center;">
+          <h2 style = "font-size: 40px;">FAQ</h2>
+          <span class = "question">How do I use this app?</span> <br> <br>
+          <span class="answer">Donaters: scroll to the bottom of this form and input your information.</span>
 
+          <form action="/add/" method="POST" class="form-container" style="font-size:12px;">
+            <h2 style="text-align: center;">For Donators:</h2>
+            <input type="text" id="name" placeholder="Your Name" name="name" required style="padding:10px;">
+            <br>
+            <input type="text" id="street" placeholder="Street Address" name="street" style="padding:10px;" required>
+            <input type="text" id="city" placeholder="City" name="city" style="padding:10px;" required>
+            <input type="text" id="state" placeholder="State/Province" name="state" style="padding:10px;" required>
+            <input type="text" id="zip" placeholder="Postal/Zip Code" name="zip" style="padding:10px;" required>
+            <br>
+            <br>
+            <br>
+            <button type="submit" class="btn">Submit Form</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+      </div>
+    </div>
+    
     <div id = "map_sidenav" style = 'font-family: Quicksand; '>
       <div id = "map">
         <script>
 
-          mapboxgl.accessToken = 'pk.eyJ1IjoicmQzNjAiLCJhIjoiY2s4Y3VjdXFpMGxjbTNsanE5cWhzNXd3bSJ9.z-sq6wzY2jA3oG6sW5_Uqg';
+          mapboxgl.accessToken = '{{ mbat }}';
           
           var map = new mapboxgl.Map({
             container: 'map',
@@ -150,7 +169,7 @@
               var el = document.createElement('div');
               el.className = 'marker';
           
-              button_html = `<form class="form-group" action="/remove/${marker.properties.identifier}/" method="POST"><input type="text" id="phone_number" name="phone_number"><button type="submit" class="btn btn-primary">Claim</button></form>`
+              button_html = `<form class="form-group" action="/remove/${marker.properties.identifier}/" method="POST"><input type="text" id="phone_number" name="phone_number"><button type="submit" class="btn btn-primary">Sponsor</button></form>`
               final_html = '<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + button_html
               console.log(final_html)
               // make a marker for each feature and add to the map
@@ -165,33 +184,34 @@
           
           </script>
         
-        </script>
+      
       </div>
+
+
       <div id = "sidenav">
         <div id = "sidenav_header">
-            <span style = "font-size: 35px; position:relative; top: 22%; color: white; left: 9%; border-left: 3px solid white; padding-left: 10px;">Members in Need</span>
+            <span style = "font-size: 35px; position:relative; top: 22%; color: white; left: 9%; border-left: 3px solid white; padding-left: 10px;">Recipients</span>
         </div>
         <div id = "membersinfo">
-            <div class = "memberdiv">
-                <span class = "name"> Name: <span class = "colored">Rashad Philizaire</span> </span>
+          {% for address in list_new %}
+          <div class = "memberdiv" style="font-size:24px; text-align: center">
+                <span class = "name"> <span class = "colored">{{ address[1] }}</span> </span>
                 <br>
-                <span class="distance"> Distance: <span class = "colored">14 miles</span> </span>
+                
+                <span class="items"> <span class = "colored">{{address[2]}}</span> </span>
                 <br>
-                <span class="items"> Items Need: <span class = "colored">Toilet Paper</span> </span>
+                
                 <br>
-                <span class="urgency"> Urgency: <span class = "colored" style="font-weight: bolder;">!!!</span> </span>
-                <br>
-                <button class = "givebutton">Fulfill Request</button>
+                
             </div>
-            <div class="memberdiv">
-            </div>
-            <div class="memberdiv">
-            </div>
-            <div class="memberdiv">
+          {% endfor %}
+          <div class="memberdiv">
             </div>
         </div>
       </div>
     </div>
+
+    
 
 
 </body>

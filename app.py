@@ -41,9 +41,11 @@ def remove(identifier: str):
 @app.route('/add/', methods=['POST'])
 def add():
     if request.method == 'POST':
-        add_to_list()
+        print(request.method)
+        add_to_list(request)
         return redirect('/')
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
 

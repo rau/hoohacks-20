@@ -1,10 +1,12 @@
 from keys import GOOGLE_API_KEY, ACCOUNT_SID, AUTH_TOKEN
 from twilio.rest import Client
+from flask import session
 import sys
 import googlemaps
 import json
 import string
 import random
+import requests
 
 def address_to_lnglat(address):
     str_value = address
@@ -49,6 +51,8 @@ def json_to_list():
             new_list.append(feature['properties']['title'])
             new_list.append(feature['properties']['description'])
             new_list.append(feature['properties']['identifier'])
+            # url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+            # r = requests.get(url + 'origins = ' + session['origin'] + '&destinations = ' + feature['properties']['address'] + '&key = ' + GOOGLE_API_KEY)
             list_pass.append(new_list)
         return list_pass
 
@@ -64,10 +68,10 @@ def remove_from_list(identifier_compare):
         with open('static/latlng.json', 'w') as f:
             json.dump(latlng, f, indent=4) # sort_keys=True
 
-def add_to_list():
+def add_to_list(request):
     name = request.form['name']
-    address = request.form['address']
-    description = request.form['description']
+    address = request.form['street'] + ', ' + request.form['city'] + ', ' + request.form['state'] + ', ' + request.form['zip']
+    description = request.form['itemneeded']
     # name = 'Rashad Philizaire'
     # address = '6518 Trask Terrace, Alexandria, VA, 22315'
     # description = 'I need toilet paper ASAP'
@@ -103,4 +107,6 @@ def text_info(identifier_compare, phone_number):
         body=body_of_text
     )
 
-    
+
+def set_session_keys():
+    session['origin'] = request.form['origin_address'] 
