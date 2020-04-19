@@ -51,8 +51,10 @@ def json_to_list():
             new_list.append(feature['properties']['title'])
             new_list.append(feature['properties']['description'])
             new_list.append(feature['properties']['identifier'])
-            # url = "https://maps.googleapis.com/maps/api/distancematrix/json"
-            # r = requests.get(url + 'origins = ' + session['origin'] + '&destinations = ' + feature['properties']['address'] + '&key = ' + GOOGLE_API_KEY)
+            # if 'origin' in session:
+            #     url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+            #     r = requests.get(url + 'origins = ' + session['origin'] + '&destinations = ' + feature['properties']['address'] + '&key = ' + GOOGLE_API_KEY)
+            #     new_list.append(distance)
             list_pass.append(new_list)
         return list_pass
 
@@ -108,5 +110,5 @@ def text_info(identifier_compare, phone_number):
     )
 
 
-def set_session_keys():
-    session['origin'] = request.form['origin_address'] 
+def set_session_keys(request):
+    session['origin'] = request.form['street_origin'] + ', ' + request.form['city_origin'] + ', ' + request.form['state_origin'] + request.form['zip_origin'] 

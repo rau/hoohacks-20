@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask import send_file, make_response, send_from_directory
-from functions import json_to_list, remove_from_list, add_to_list, text_info
+from functions import json_to_list, remove_from_list, add_to_list, text_info, set_session_keys
 from keys import MAPBOX_TOKEN
 import os
 
@@ -11,7 +11,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 app = Flask(__name__, template_folder="templates", static_url_path='/static')
 
-# app.secret_key = SECRET_KEY
+app.secret_key = 'abcd'
 app.root_path = os.path.dirname(os.path.abspath(__file__))
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['DEBUG'] = True
@@ -41,10 +41,14 @@ def remove(identifier: str):
 @app.route('/add/', methods=['POST'])
 def add():
     if request.method == 'POST':
-        print(request.method)
         add_to_list(request)
         return redirect('/')
 
+@app.route('/setaddress/', methods=['POST'])
+def setaddress():
+    if request.method == 'POST':
+        set_session_keys(request)
+        return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)

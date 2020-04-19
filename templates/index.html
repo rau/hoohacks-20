@@ -50,6 +50,20 @@
         document.getElementById("fullpage").style.overflow = "visible";
       }
 
+      function openAbout() {
+          if (document.getElementById("ABOUTmodal").style.display == "block") {
+            closeFAQ()
+            return;
+          }
+          document.getElementById("ABOUTmodal").style.display = "block"
+          // document.getElementById("fullpage").style.overflow = "hidden";
+
+        }
+        function closeAbout() {
+          document.getElementById("ABOUTmodal").style.display = "none"
+          document.getElementById("fullpage").style.overflow = "visible";
+        }
+
   </script>
   <title>Maps</title>
 </head>
@@ -64,10 +78,9 @@
           <div id="links">
               <!-- <a href="#login">Login</a> -->
               <a href="javascript:openForm();">Request</a>
-              <a href="#">|</a>
+              <a>|</a>
               <a href="javascript:openFAQ();">About</a>
               <a href="javascript:openFAQ();">FAQ</a>
-              <a href="javascript:openFAQ();">Why Donate?</a>
               <!-- <a href="#map_sidenav">Map</a> -->
           </div>  
         </div>
@@ -102,27 +115,55 @@
     </div>
 
     <div class="popup" ">
-      <div class="faq-popup" id="FAQmodal" style = "width: 50%; height: 50%; background-color: white; text-align: center;">
+      <div class="faq-popup" id="FAQmodal" style = "width: 50%; height: 50%; background-color: white; text-align: center; overflow: scroll;">
           <h2 style = "font-size: 40px;">FAQ</h2>
           <span class = "question">How do I use this app?</span> <br> <br>
-          <span class="answer">Donaters: scroll to the bottom of this form and input your information.</span>
+          <span class="answer"> <span style="color: rgb(179, 86, 0); font-weight: bolder;">Donators</span> : scroll to the bottom of this form and input your information.</span> <br>
+          <span class="answer"> <span style= "color: rgb(255, 218, 166); font-weight: bolder;">Recievers</span> : Make a request in the top right of the navigation bar.</span>
 
-          <form action="/add/" method="POST" class="form-container" style="font-size:12px;">
+          <br> <br> <br>
+
+          <span class="question">What is the purpose of this app?</span> <br> <br>
+          <span class="answer">In light of the recent developments of COVID-19, fear has prompted members of society to stock up on resources, restricting resources for the rest of society. In addition to the limited resources, members of society who are more susceptible to contracting the virus, including elderly and immunocompromised, are unable to leave their homes. Through its simple to use interface, this app was created with the intention of helping those with limited access to resources.</span> <br>
+
+          <form action="/setaddress/" method="POST" class="form-container" style="font-size:12px;">
             <h2 style="text-align: center;">For Donators:</h2>
-            <input type="text" id="name" placeholder="Your Name" name="name" required style="padding:10px;">
+            <input type="text" id="name_origin" placeholder="Your Name" name="name_origin" required style="padding:10px;">
             <br>
-            <input type="text" id="street" placeholder="Street Address" name="street" style="padding:10px;" required>
-            <input type="text" id="city" placeholder="City" name="city" style="padding:10px;" required>
-            <input type="text" id="state" placeholder="State/Province" name="state" style="padding:10px;" required>
-            <input type="text" id="zip" placeholder="Postal/Zip Code" name="zip" style="padding:10px;" required>
+            <input type="text" id="street_origin" placeholder="Street Address" name="street_origin" style="padding:10px;" required>
+            <input type="text" id="city_origin" placeholder="City" name="city_origin" style="padding:10px;" required>
+            <input type="text" id="state_origin" placeholder="State/Province" name="state_origin" style="padding:10px;" required>
+            <input type="text" id="zip_origin" placeholder="Postal/Zip Code" name="zip_origin" style="padding:10px;" required>
             <br>
             <br>
             <br>
             <button type="submit" class="btn">Submit Form</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
           </form>
       </div>
     </div>
+
+    <!-- <div class="popup" ">
+      <div class=" about-popup" id="ABOUTmodual"
+      style="width: 50%; height: 50%; background-color: white; text-align: center; overflow: scroll;">
+      <h2 style="font-size: 40px;">FAQ</h2>
+      <span class="question">How do I use this app?</span> <br> <br>
+      <span class="answer"> <span style="color: rgb(179, 86, 0); font-weight: bolder;">Donaters</span> : scroll to the
+        bottom of this form and input your information.</span> <br>
+      <span class="answer"> <span style="color: rgb(255, 218, 166); font-weight: bolder;">Recievers</span> : Make a request
+        in the top right of the navigation bar.</span>
+    
+      <br> <br> <br>
+    
+      <span class="question">What is the purpose of this app?</span> <br> <br>
+      <span class="answer">In light of the recent developments of COVID-19, fear has prompted members of society to stock up
+        on resources, restricting resources for the rest of society. In addition to the limited resources, members of
+        society who are more susceptible to contracting the virus, including elderly and immunocompromised, are unable to
+        leave their homes. Through its simple to use interface, this app was created with the intention of helping those
+        with limited access to resources.</span> <br>
+    
+     
+    </div>
+    </div> -->
     
     <div id = "map_sidenav" style = 'font-family: Quicksand; '>
       <div id = "map">
@@ -194,7 +235,7 @@
         </div>
         <div id = "membersinfo">
           {% for address in list_new %}
-          <div class = "memberdiv" style="font-size:24px; text-align: center">
+          <div class = "memberdiv" style="font-size:16px; text-align: center">
                 <span class = "name"> <span class = "colored">{{ address[1] }}</span> </span>
                 <br>
                 

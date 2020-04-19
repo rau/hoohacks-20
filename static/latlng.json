@@ -6,23 +6,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -77.1293474,
-                    38.776739
-                ]
-            },
-            "properties": {
-                "title": "Rashad Philizaire @ Alexandria",
-                "description": "I need toilet paper ASAP",
-                "identifier": "7XRZMNCWKD",
-                "address": "BAHALL ajsdlka",
-                "name": "Rashad"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     -77.3967888,
                     38.907362
                 ]
@@ -40,82 +23,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -77.1293474,
-                    38.776739
-                ]
-            },
-            "properties": {
-                "title": "Rashad Philizaire @ Alexandria",
-                "description": "TOILET",
-                "identifier": "QZ809ZZEWH",
-                "address": "6518 Trask Terrace, Alexandria, VA, 22315",
-                "name": "Rashad Philizaire"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    -91.61480639999999,
-                    42.0243714
-                ]
-            },
-            "properties": {
-                "title": "Tiffany VanTomme c/o p0lyamorousfriend @ Cedar Rapids",
-                "description": "Hand sanitizer",
-                "identifier": "3I2MITPTP8",
-                "address": "1015 Bridgit CT SE, Cedar rapids, Iowa, 52403",
-                "name": "Tiffany VanTomme c/o p0lyamorousfriend"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    -77.1222243,
-                    38.7962834
-                ]
-            },
-            "properties": {
-                "title": "Austin Kim @ Alexandria",
-                "description": "Dumb",
-                "identifier": "5PX4N2CZEM",
-                "address": "5609 James Gunnell Lane, Alexandria, Virginia, 22310",
-                "name": "Austin Kim"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    -77.3959143,
-                    38.9072865
-                ]
-            },
-            "properties": {
-                "title": "Raunak Daga @ Herndon",
-                "description": "Poop",
-                "identifier": "QOJK39TQJO",
-                "address": "13103 Briargrove Ct, Oak Hill, VA, 20171",
-                "name": "Raunak Daga"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     -77.3967888,
                     38.907362
                 ]
             },
             "properties": {
                 "title": "Raunak Daga @ Herndon",
-                "description": "asdas",
-                "identifier": "API9U1WORB",
+                "description": "Yeet",
+                "identifier": "DZTK22PAVT",
                 "address": "13109 Briargrove Ct, Oak Hill, VA, 20171",
                 "name": "Raunak Daga"
             }
